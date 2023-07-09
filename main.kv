@@ -1,0 +1,66 @@
+<NewNote>:
+	title: "New Note"
+	auto_dismiss: False
+	size_hint: .6, .4
+
+	BoxLayout:
+		orientation: "vertical"
+		BoxLayout:
+			size_hint_y: .3
+			spacing: 10
+
+			Button:
+				text: "Create"
+				on_press:
+					root.create_note(note_content)
+
+			Button:
+				text: "Cancel"
+				on_press:
+					root.dismiss()
+
+		TextInput:
+			id: note_content
+			focused: True
+			font_size: 18
+
+<Note>:
+	size_hint_y: None
+	TextInput:
+		id: data
+		font_size: 24
+		readonly: True
+
+	Button:
+		text: "del"
+		size_hint_x: .3
+		on_press: root.delete(root)
+
+<AppLayout>:
+	FloatLayout:
+		BoxLayout:
+			orientation: "vertical"
+
+			ActionBar:
+				ActionView:
+					ActionPrevious:
+						title: "uGlyNOTes"
+						with_previous: False
+
+					ActionButton:
+						text: "Refresh"
+						on_press: root.refresh()
+
+			ScrollView:
+				BoxLayout:
+					id: notes_board
+					spacing: 10
+					padding: 5
+					size_hint_y: None 
+					orientation: "vertical"
+
+	Button:
+		text: "+"
+		size_hint: (.1, .1)
+		pos_hint: {"center_x": .8, "center_y": .2}
+		on_press: root.create_note()
